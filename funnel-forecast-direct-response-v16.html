@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Tenor+Sans&amp;display=swap" rel="stylesheet"/>
+<title>Know if your direct-response campaign can work before you spend | Funnel Forecast</title>
+<meta name="description" content="Free direct-response funnel calculator to forecast break-even targets, revenue, ROAS, and conversion goals before you launch." />
+
+<meta property="og:title" content="Know if your direct-response campaign can work before you spend" />
+<meta property="og:description" content="Free direct-response funnel calculator to forecast break-even targets, revenue, ROAS, and conversion goals before you launch." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://lindsaymfondren-bit.github.io/funnel-forecast-direct-response/" />
+<meta property="og:image" content="https://lindsaymfondren-bit.github.io/funnel-forecast-direct-response/preview.png" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Know if your direct-response campaign can work before you spend" />
+<meta name="twitter:description" content="Free direct-response funnel calculator to forecast break-even targets, revenue, ROAS, and conversion goals before you launch." />
+<meta name="twitter:image" content="https://lindsaymfondren-bit.github.io/funnel-forecast-direct-response/preview.png" />
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --coral: #FF7D5E;
+      --coral-soft: rgba(255, 125, 94, 0.10);
+      --teal: #339292;
+      --teal-soft: rgba(51, 146, 146, 0.08);
+      --ink: #111111;
+      --ink-soft: #302c2a;
+      --muted: #6f6863;
+      --bg: #F7F5F3;
+      --card: #FFFFFF;
+      --line: #E7E0DC;
+      --soft: #FBF8F6;
+      --readonly: #ECE8E5;
+      --readonly-line: #DDD5D0;
+      --success: #1f8a62;
+      --danger: #c74f45;
+      --shadow: 0 8px 20px rgba(17,17,17,0.05);
+    }
+
+    body {
+      font-family: "Inter", "Avenir Next", "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    header {
+      max-width: 920px;
+      margin: 30px auto 0;
+      padding: 10px 20px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo {
+      font-family: "Tenor Sans", "Helvetica Neue", Arial, sans-serif;
+      font-size: 34px;
+      line-height: 1.06;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .logo .divider {
+      color: #908782;
+      padding: 0 10px;
+    }
+
+    .logo .accent {
+      color: var(--teal);
+    }
+
+    .logo-sub {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      line-height: 1.55;
+      max-width: 700px;
+    }
+
+    .tabs {
+      max-width: 920px;
+      margin: 14px auto 0;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      justify-content: center;
+      padding: 4px 20px 0;
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+    }
+
+    .tabs::-webkit-scrollbar { display: none; }
+
+    .tab-btn {
+      background: #FFFFFF;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: var(--ink-soft);
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      letter-spacing: 0.04em;
+      transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease, box-shadow .15s ease;
+      min-height: 42px;
+      box-shadow: none;
+    }
+
+    .tab-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(51,146,146,0.32);
+      background: #fff;
+    }
+
+    .tab-btn.active {
+      color: #fff;
+      background: var(--teal);
+      border-color: var(--teal);
+      box-shadow: inset 0 -3px 0 var(--coral), 0 8px 16px rgba(17,17,17,0.04);
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 24px auto;
+      padding: 0 20px 60px;
+    }
+
+    .calculator { display: none; }
+    .calculator.active { display: block; }
+    .calc-header { margin-bottom: 22px; }
+
+    .calc-title {
+      font-family: "Tenor Sans", "Helvetica Neue", Arial, sans-serif;
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      color: var(--ink);
+      text-transform: none;
+    }
+
+    .calc-desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 8px;
+      line-height: 1.65;
+    }
+
+    .info-toggle {
+      background: none;
+      border: none;
+      color: var(--teal);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+      margin-top: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .info-toggle:hover { color: #256f6f; }
+
+    .info-panel {
+      display: none;
+      background: #F4FAFA;
+      border: 1px solid #D7E8E8;
+      border-radius: 4px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      font-size: 12px;
+      line-height: 1.8;
+      color: var(--muted);
+      box-shadow: 0 8px 18px rgba(17,17,17,0.03);
+    }
+
+    .info-panel.open { display: block; }
+    .info-panel strong { color: var(--ink-soft); }
+    .info-section { margin-bottom: 10px; }
+    .info-section:last-child { margin-bottom: 0; }
+
+    .card {
+      background: var(--card);
+      border-radius: 4px;
+      padding: 24px 26px;
+      margin-bottom: 16px;
+      border: 1px solid var(--line);
+      border-top: 2px solid rgba(255,125,94,0.85);
+      box-shadow: var(--shadow);
+    }
+
+    .card-title {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--teal);
+      margin-bottom: 18px;
+    }
+    .card-title.warm { color: var(--teal); }
+
+    .card-optional {
+      border: 1px solid #DDE6E6;
+      border-top: 2px solid rgba(255,125,94,0.85);
+      background: #FFFFFF;
+    }
+
+    .card-optional .card-title { color: var(--teal); }
+
+    .field-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .field-grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+
+    .field label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      color: var(--ink-soft);
+    }
+
+    .term-metric { color: var(--ink-soft); }
+    .term-money { color: var(--ink-soft); }
+
+    .field input[type="number"] {
+      border: 1.5px solid var(--line);
+      background: #fbfbfb;
+      border-radius: 4px;
+      padding: 11px 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      outline: none;
+      width: 100%;
+      min-height: 45px;
+      transition: border-color .15s ease, box-shadow .15s ease, background .15s ease;
+      -moz-appearance: textfield;
+    }
+
+    .field input[type="number"]::-webkit-inner-spin-button,
+    .field input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+    .field input[type="number"]:focus {
+      border-color: var(--teal);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(51,146,146,0.10);
+    }
+
+    .calc-display {
+      background: #ECE9E7;
+      border: 1.5px solid #D8D1CC;
+      border-radius: 4px;
+      padding: 11px 12px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #5f5954;
+      min-height: 45px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hint {
+      font-size: 10px;
+      color: #918883;
+      margin-top: 1px;
+      line-height: 1.45;
+    }
+
+    .results-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+    .result-field { display: flex; flex-direction: column; gap: 6px; }
+    .result-field.full { grid-column: 1 / -1; }
+
+    .result-field label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.10em;
+      color: var(--ink-soft);
+    }
+
+    .result-field .calc-display {
+      background: var(--readonly);
+      border: 1.5px solid var(--readonly-line);
+      color: #5f5954;
+      min-height: 45px;
+      font-size: 15px;
+      font-weight: 600;
+      padding: 11px 12px;
+      border-radius: 4px;
+    }
+
+    .result-field.primary .calc-display {
+      background: #F4FAFA;
+      border-color: #CFE4E4;
+      color: var(--teal);
+    }
+
+    .result-field.profit .calc-display {
+      background: #F4FBF8;
+      border-color: #CFE8DB;
+      color: var(--success);
+    }
+
+    .result-field.loss .calc-display {
+      background: #FDF5F4;
+      border-color: #EFD3CF;
+      color: var(--danger);
+    }
+
+    .result-hint {
+      font-size: 10px;
+      color: #928982;
+      line-height: 1.45;
+      margin-top: 2px;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .reset-btn {
+      background: var(--coral);
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 12px 20px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      transition: transform .15s ease, opacity .15s ease, box-shadow .15s ease;
+      box-shadow: 0 10px 18px rgba(255,125,94,0.18);
+    }
+
+    .reset-btn:hover {
+      opacity: .92;
+      transform: translateY(-1px);
+    }
+
+    .intro-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      padding: 16px 18px;
+    }
+
+    .intro-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--teal);
+    }
+
+    .intro-toggle {
+      width: auto;
+      background: #FFFFFF;
+      border: 1px solid var(--line);
+      text-align: left;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--ink);
+      padding: 10px 14px;
+    }
+
+    .intro-toggle-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+    }
+
+    .intro-toggle-meta {
+      font-size: 10px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .intro-content {
+      display: none;
+      margin-top: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+    }
+
+    .intro-content.open { display: block; }
+
+    .intro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+    .intro-block strong {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .intro-block p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+
+    .intro-note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+      padding: 12px 14px;
+      border-radius: 4px;
+      background: #EEF7F7;
+    }
+
+    .start-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .start-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-top: 2px solid rgba(255,125,94,0.85);
+      padding: 20px 22px;
+      border-radius: 4px;
+      box-shadow: var(--shadow);
+      margin-bottom: 16px;
+    }
+    .start-card h3 {
+      font-family: "Tenor Sans", "Helvetica Neue", Arial, sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      margin-bottom: 10px;
+      color: var(--ink);
+    }
+    .start-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+    .start-card p, .start-note, .start-list li {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .start-note {
+      margin-top: 10px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+    }
+    .start-list { margin: 0; padding-left: 18px; }
+    .start-list li { margin-bottom: 8px; }
+    .intro-card { display:none; }
+
+    .source-line {
+      padding-top: 8px;
+      border-top: 1px solid #E6EDED;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .sources-card {
+      grid-column: 1 / -1;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid rgba(51,146,146,0.22);
+      background: #fff;
+      color: var(--teal);
+      box-shadow: 0 10px 20px rgba(17,17,17,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity .18s ease, transform .18s ease, box-shadow .18s ease;
+      z-index: 30;
+      padding: 0;
+    }
+
+    .back-to-top svg {
+      width: 22px;
+      height: 22px;
+      display: block;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover { box-shadow: 0 12px 24px rgba(17,17,17,0.12); }
+
+    .trust-strip {
+      max-width: 920px;
+      margin: 12px auto 0;
+      padding: 0 20px;
+    }
+
+    .trust-note {
+      background: #F4FAFA;
+      border: 1px solid #D7E8E8;
+      border-left: 4px solid var(--teal);
+      border-radius: 4px;
+      padding: 14px 16px;
+      font-size: 13px;
+      line-height: 1.65;
+      color: var(--muted);
+      box-shadow: 0 8px 18px rgba(17,17,17,0.03);
+    }
+
+    .mini-cta {
+      max-width: 920px;
+      margin: 14px auto 0;
+      padding: 0 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .mini-cta strong { color: var(--ink-soft); }
+
+    .footer-note {
+      max-width: 920px;
+      margin: 8px auto 36px;
+      padding: 0 20px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .footer-note a {
+      color: var(--teal);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-note a:hover { text-decoration: underline; }
+
+
+    
+    .start-stack {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+      max-width: 920px;
+    }
+
+    .start-list.tight li { margin-bottom: 6px; }
+
+    .site-footer {
+      text-align: center;
+      padding: 24px 20px 28px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .site-footer a {
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .site-footer a:hover {
+      text-decoration: underline;
+    }
+
+@media (max-width: 800px) {
+      header {
+        margin-top: 18px;
+        padding: 10px 16px 2px;
+      }
+      .tabs {
+        padding: 4px 16px 0;
+        justify-content: flex-start;
+      }
+      .container { padding: 0 14px 42px; }
+      .card { padding: 18px; }
+      .intro-grid { grid-template-columns: 1fr; }
+      .start-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .logo { font-size: 28px; }
+      .logo-sub { font-size: 11px; }
+      .field-grid { grid-template-columns: repeat(2, 1fr); }
+      .results-grid { grid-template-columns: 1fr; }
+      .result-card.full { grid-column: 1; }
+      .result-value { font-size: 22px; }
+      .intro-toggle {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 375px) {
+      .field-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<header>
+<div class="logo-wrap">
+<div class="logo">Funnel Forecast <span class="divider">|</span> <span class="accent">Direct Response</span></div>
+<div class="logo-sub">Pressure-test direct-response funnel math before you spend. Forecast break-even targets, revenue, ROAS, and conversion goals across common funnel types.</div>
+</div>
+</header>
+</div>
+<div class="tabs">
+<button class="tab-btn active" data-tab="starthere">Start Here</button>
+<button class="tab-btn" data-tab="leadmagnet">Lead Magnet</button>
+<button class="tab-btn" data-tab="tripwire">Tripwire</button>
+<button class="tab-btn" data-tab="digital">Digital Product</button>
+<button class="tab-btn" data-tab="webinar">Webinar</button>
+<button class="tab-btn" data-tab="vsl">VSL / Call Booking</button>
+</div>
+<div class="container">
+<!-- ── START HERE ── -->
+<div class="calculator active" id="calc-starthere">
+<div class="calc-header">
+<div class="calc-title">Start Here</div>
+<div class="calc-desc">A quick orientation before you start changing numbers.</div>
+</div>
+
+<div class="start-stack">
+  <div class="start-card">
+    <div class="start-kicker">Start Here</div>
+    <h3>Pressure-test the math before you spend.</h3>
+    <p>Use this tool to estimate leads, buyers, revenue, ROAS, and break-even targets across common direct-response funnels. It is built for planning, not prediction.</p>
+  </div>
+
+  <div class="start-card">
+    <div class="start-kicker">Which calculator should I use?</div>
+    <ul class="start-list tight">
+      <li><strong>Lead Magnet:</strong> estimate lead volume and cost per lead</li>
+      <li><strong>Tripwire:</strong> model a low-ticket front-end offer with an optional bump</li>
+      <li><strong>Digital Product:</strong> forecast sales-page performance with an optional bump and OTO</li>
+      <li><strong>Webinar:</strong> estimate opt-ins, purchases, and break-even for a webinar funnel</li>
+      <li><strong>VSL / Call Booking:</strong> model booked calls, show-ups, closes, and revenue</li>
+    </ul>
+  </div>
+
+  <div class="start-card">
+    <div class="start-kicker">Benchmarks &amp; Limits</div>
+    <p>Default values are directional starting points, not guarantees. Colder traffic, tighter audiences, weak creative, thin margins, and niche offers can all change the math fast. Use this for scenario planning, then replace defaults with your actual numbers.</p>
+  </div>
+
+  <div class="start-card">
+    <div class="start-kicker">How to use it</div>
+    <h3>Keep the inputs in one time frame.</h3>
+    <p>Weekly, monthly, or quarterly all work. Just keep every input in the same time frame so the math stays consistent. Use your own historical numbers whenever you have them.</p>
+  </div>
+</div>
+</div>
+<!-- ── LEAD MAGNET ── -->
+<div class="calculator" id="calc-leadmagnet">
+<div class="calc-header">
+<div class="calc-title">Lead Magnet</div>
+<div class="calc-desc">Forecast lead volume and cost per lead from paid traffic. This is useful when the front end is meant to feed the rest of the funnel.</div>
+<button class="info-toggle" onclick="toggleInfo('leadmagnet')">ⓘ Benchmarks &amp; Notes</button>
+<div class="info-panel" id="info-leadmagnet">
+<div class="info-section"><strong>Purpose:</strong> Drive paid traffic to a free offer and estimate the volume and cost of leads entering the rest of your funnel.</div>
+<div class="info-section"><strong>Benchmarks:</strong> Meta-style paid social often lands around 1–3% link click-through rate (CTR), while cost per lead (CPL) can vary widely by audience, niche, and offer. Use your own cost per lead (CPL) when you have it.</div>
+<div class="info-section"><strong>Watch out for:</strong> Cheap leads are not the same thing as qualified leads. Low cost can still hide poor fit.</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 1 — Ad Metrics</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Ad Spend</span> ($)</label><input id="lm-spend" min="0" step="1" type="number" value="1000"/></div>
+<div class="field"><label><span class="term-metric">CPM</span> ($)</label><input id="lm-cpm" min="0" step="0.1" type="number" value="15"/><span class="hint">Cost per 1,000 impressions</span></div>
+<div class="field"><label><span class="term-metric">CPL</span> ($)</label><input id="lm-cpl" min="0.01" step="0.1" type="number" value="12"/><span class="hint">Cost per lead</span></div>
+<div class="field"><label>Impressions</label><div class="calc-display" id="lm-impressions">—</div></div>
+</div>
+</div>
+<div class="card"><div class="card-title warm">Results</div><div class="results-grid"><div class="result-field"><label>Total Leads</label><div class="calc-display" id="lm-leads">—</div></div><div class="result-field primary"><label>Cost Per Lead</label><div class="calc-display" id="lm-cpl-result">—</div></div><div class="result-field"><label>Total Impressions</label><div class="calc-display" id="lm-impressions-result">—</div></div><div class="result-field"><label>Cost Per 1,000 Impressions</label><div class="calc-display" id="lm-cpm-result">—</div></div></div></div>
+<div class="btn-row"><button class="reset-btn" onclick="resetTab('leadmagnet')">Reset</button></div>
+</div>
+<!-- ── TRIPWIRE ── -->
+<div class="calculator" id="calc-tripwire">
+<div class="calc-header">
+<div class="calc-title">Tripwire</div>
+<div class="calc-desc">Low-ticket front-end offer with an optional bump. Built to create buyers and recover some acquisition cost, not necessarily to carry all the profit alone.</div>
+<button class="info-toggle" onclick="toggleInfo('tripwire')">ⓘ Benchmarks &amp; Notes</button>
+<div class="info-panel" id="info-tripwire">
+<div class="info-section"><strong>Purpose:</strong> Model a low-ticket offer that turns leads into buyers quickly, even if it only breaks even or partially offsets acquisition cost.</div>
+<div class="info-section"><strong>Benchmarks:</strong> Purchase rates often land around 3–10% of leads. A healthier default for bump purchase rate is 20–40%, not top-performer numbers.</div>
+<div class="info-section"><strong>Watch out for:</strong> Tripwires are feeder offers. A modest return on ad spend (ROAS) can still be acceptable if the back end monetizes new buyers later.</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 1 — Ad Metrics</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Ad Spend</span> ($)</label><input id="tw-spend" min="0" step="1" type="number" value="1000"/></div>
+<div class="field"><label><span class="term-metric">CPM</span> ($)</label><input id="tw-cpm" min="0" step="0.1" type="number" value="15"/><span class="hint">Cost per 1,000 impressions</span></div>
+<div class="field"><label><span class="term-metric">CPL</span> ($)</label><input id="tw-cpl" min="0.01" step="0.1" type="number" value="5"/><span class="hint">Cost per lead</span></div>
+<div class="field"><label>Impressions</label><div class="calc-display" id="tw-impressions">—</div></div>
+<div class="field"><label>Total Leads</label><div class="calc-display" id="tw-leads">—</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 2 — Tripwire Offer</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Price</span> ($)</label><input id="tw-price" min="0" step="0.01" type="number" value="17"/></div>
+<div class="field"><label><span class="term-money">Purchase Rate</span> (%)</label><input id="tw-pr" max="100" min="0" step="0.1" type="number" value="5"/><span class="hint">% of leads who buy</span></div>
+<div class="field"><label>Purchases</label><div class="calc-display" id="tw-purchases">—</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 3 — Bump Order (Optional)</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Price</span> ($)</label><input id="tw-bump-price" min="0" step="0.01" type="number" value="27"/></div>
+<div class="field"><label><span class="term-money">Purchase Rate</span> (%)</label><input id="tw-bump-pr" max="100" min="0" step="0.1" type="number" value="30"/><span class="hint">% of buyers who add bump</span></div>
+<div class="field"><label>Bump Purchases</label><div class="calc-display" id="tw-bump-purchases">—</div></div>
+</div>
+</div>
+<div class="card card-optional">
+<div class="card-title warm">Other Expenses (Optional)</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Other Expenses</span> ($)</label><input id="tw-expenses" min="0" step="0.01" type="number" value="0"/><span class="hint">Platform fees, tools, freelancers, etc.</span></div>
+</div>
+</div>
+<div class="card"><div class="card-title warm">Results</div><div class="results-grid"><div class="result-field" id="tw-be-rate-card"><label>Break-Even Purchase Rate</label><div class="calc-display" id="tw-be-rate">—</div><div class="result-hint" id="tw-be-rate-hint"></div></div><div class="result-field primary"><label>ROAS</label><div class="calc-display" id="tw-roas">—</div></div><div class="result-field"><label>Total Revenue</label><div class="calc-display" id="tw-revenue">—</div></div><div class="result-field"><label>Average Order Value</label><div class="calc-display" id="tw-aov">—</div></div><div class="result-field"><label>Cost Per Sale</label><div class="calc-display" id="tw-cps">—</div></div><div class="result-field full" id="tw-profit-card"><label>Revenue After Ad Spend</label><div class="calc-display" id="tw-profit">—</div></div><div class="result-field full" id="tw-net-profit-card" style="display:none;"><label>Estimated Net Profit</label><div class="calc-display" id="tw-net-profit">—</div></div></div></div>
+<div class="btn-row"><button class="reset-btn" onclick="resetTab('tripwire')">Reset</button></div>
+</div>
+<!-- ── DIGITAL PRODUCT ── -->
+<div class="calculator" id="calc-digital">
+<div class="calc-header">
+<div class="calc-title">Sales Page Funnel</div>
+<div class="calc-desc">Clicks to a sales page for a direct-response offer with optional bump and one-time offer (OTO).</div>
+<button class="info-toggle" onclick="toggleInfo('digital')">ⓘ Benchmarks &amp; Notes</button>
+<div class="info-panel" id="info-digital">
+<div class="info-section"><strong>Purpose:</strong> Model a direct-response digital offer where paid traffic hits a sales page and optional post-purchase offers lift Average Order Value (AOV).</div>
+<div class="info-section"><strong>Benchmarks:</strong> Cold paid traffic often lands around 1.5–2% link click-through rate (CTR), 1–5% sales-page conversion, 20–40% bump purchase rate, and 5–15% one-time offer (OTO) purchase rate.</div>
+<div class="info-section"><strong>Watch out for:</strong> If traffic clicks but the purchase rate is weak, the problem is usually the offer-page experience, not cost per 1,000 impressions (CPM). The main product is usually priced above the bump order.</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 1 — Ad Metrics</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Ad Spend</span> ($)</label><input id="dp-spend" min="0" step="1" type="number" value="3000"/></div>
+<div class="field"><label><span class="term-metric">CPM</span> ($)</label><input id="dp-cpm" min="0" step="0.1" type="number" value="20"/><span class="hint">Cost per 1,000 impressions</span></div>
+<div class="field"><label>CTR — Link (%)</label><input id="dp-ctr" max="100" min="0" step="0.1" type="number" value="1.7"/><span class="hint">% of impressions that click</span></div>
+<div class="field"><label>Impressions</label><div class="calc-display" id="dp-impressions">—</div></div>
+<div class="field"><label>Clicks to Site</label><div class="calc-display" id="dp-clicks">—</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 2 — Main Product</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Price</span> ($)</label><input id="dp-price" min="0" step="0.01" type="number" value="47"/></div>
+<div class="field"><label><span class="term-money">Purchase Rate</span> (%)</label><input id="dp-pr" max="100" min="0" step="0.1" type="number" value="3"/><span class="hint">% of clicks who buy</span></div>
+<div class="field"><label>Purchases</label><div class="calc-display" id="dp-purchases">—</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 3 — Bump Order (Optional)</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Price</span> ($)</label><input id="dp-bump-price" min="0" step="0.01" type="number" value="17"/></div>
+<div class="field"><label><span class="term-money">Purchase Rate</span> (%)</label><input id="dp-bump-pr" max="100" min="0" step="0.1" type="number" value="30"/></div>
+<div class="field"><label>Bump Purchases</label><div class="calc-display" id="dp-bump-purchases">—</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 4 — OTO (Optional)</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Price</span> ($)</label><input id="dp-oto-price" min="0" step="0.01" type="number" value="97"/></div>
+<div class="field"><label><span class="term-money">Purchase Rate</span> (%)</label><input id="dp-oto-pr" max="100" min="0" step="0.1" type="number" value="10"/><span class="hint">Based on Step 2 purchases</span></div>
+<div class="field"><label>OTO Purchases</label><div class="calc-display" id="dp-oto-purchases">—</div></div>
+</div>
+</div>
+<div class="card card-optional">
+<div class="card-title warm">Other Expenses (Optional)</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Other Expenses</span> ($)</label><input id="dp-expenses" min="0" step="0.01" type="number" value="0"/><span class="hint">Platform fees, tools, freelancers, etc.</span></div>
+</div>
+</div>
+<div class="card"><div class="card-title warm">Results</div><div class="results-grid"><div class="result-field" id="dp-be-rate-card"><label>Break-Even Purchase Rate</label><div class="calc-display" id="dp-be-rate">—</div><div class="result-hint" id="dp-be-rate-hint"></div></div><div class="result-field primary"><label>ROAS</label><div class="calc-display" id="dp-roas">—</div></div><div class="result-field"><label>Total Revenue</label><div class="calc-display" id="dp-revenue">—</div></div><div class="result-field"><label>Average Order Value</label><div class="calc-display" id="dp-aov">—</div></div><div class="result-field"><label>Cost Per Sale</label><div class="calc-display" id="dp-cps">—</div></div><div class="result-field full" id="dp-profit-card"><label>Revenue After Ad Spend</label><div class="calc-display" id="dp-profit">—</div></div><div class="result-field full" id="dp-net-profit-card" style="display:none;"><label>Estimated Net Profit</label><div class="calc-display" id="dp-net-profit">—</div></div></div></div>
+<div class="btn-row"><button class="reset-btn" onclick="resetTab('digital')">Reset</button></div>
+</div>
+<!-- ── WEBINAR ── -->
+<div class="calculator" id="calc-webinar">
+<div class="calc-header">
+<div class="calc-title">Webinar</div>
+<div class="calc-desc">Opt-ins to a live or automated webinar with one blended purchase rate.</div>
+<button class="info-toggle" onclick="toggleInfo('webinar')">ⓘ Benchmarks &amp; Notes</button>
+<div class="info-panel" id="info-webinar">
+<div class="info-section"><strong>Purpose:</strong> Estimate webinar economics using one blended opt-in-to-purchase rate instead of modeling registration, attendance, and offer conversion separately.</div>
+<div class="info-section"><strong>Benchmarks:</strong> Webinar cost per lead (CPL) can vary widely, but 3–10% overall opt-in-to-purchase is a more realistic starting range than top-performer numbers unless you know your audience is warm.</div>
+<div class="info-section"><strong>Watch out for:</strong> This is a shortcut model. A weak show-up rate or a weak pitch can hide inside that one conversion field, so adjust with care.</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 1 — Ad Metrics</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Ad Spend</span> ($)</label><input id="wb-spend" min="0" step="1" type="number" value="1000"/></div>
+<div class="field"><label><span class="term-metric">CPM</span> ($)</label><input id="wb-cpm" min="0" step="0.1" type="number" value="20"/></div>
+<div class="field"><label><span class="term-metric">CPL</span> ($)</label><input id="wb-cpl" min="0.01" step="0.1" type="number" value="12"/><span class="hint">Cost per webinar opt-in</span></div>
+<div class="field"><label>Impressions</label><div class="calc-display" id="wb-impressions">—</div></div>
+<div class="field"><label>Webinar Opt-Ins</label><div class="calc-display" id="wb-optins">—</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 2 — Main Offer</div>
+<div class="field-grid field-grid-2">
+<div class="field"><label><span class="term-money">Conversion Rate</span> (%)</label><input id="wb-conv" max="100" min="0" step="0.1" type="number" value="5"/><span class="hint">% of opt-ins who purchase</span></div>
+<div class="field"><label>Offer Price ($)</label><input id="wb-price" min="0" step="0.01" type="number" value="997"/></div>
+<div class="field"><label>Purchases</label><div class="calc-display" id="wb-purchases">—</div></div>
+</div>
+</div>
+<div class="card card-optional">
+<div class="card-title warm">Other Expenses (Optional)</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Other Expenses</span> ($)</label><input id="wb-expenses" min="0" step="0.01" type="number" value="0"/><span class="hint">Platform fees, tools, freelancers, etc.</span></div>
+</div>
+</div>
+<div class="card"><div class="card-title warm">Results</div><div class="results-grid"><div class="result-field" id="wb-be-rate-card"><label>Break-Even Conversion Rate</label><div class="calc-display" id="wb-be-rate">—</div><div class="result-hint" id="wb-be-rate-hint"></div></div><div class="result-field primary"><label>ROAS</label><div class="calc-display" id="wb-roas">—</div></div><div class="result-field"><label>Total Revenue</label><div class="calc-display" id="wb-revenue">—</div></div><div class="result-field"><label>Cost Per Sale</label><div class="calc-display" id="wb-cps">—</div></div><div class="result-field full" id="wb-profit-card"><label>Revenue After Ad Spend</label><div class="calc-display" id="wb-profit">—</div></div><div class="result-field full" id="wb-net-profit-card" style="display:none;"><label>Estimated Net Profit</label><div class="calc-display" id="wb-net-profit">—</div></div></div></div>
+<div class="btn-row"><button class="reset-btn" onclick="resetTab('webinar')">Reset</button></div>
+</div>
+<!-- ── VSL ── -->
+<div class="calculator" id="calc-vsl">
+<div class="calc-header">
+<div class="calc-title">VSL / Call Booking</div>
+<div class="calc-desc">Opt-ins watch a VSL, book a call, show up, and close.</div>
+<button class="info-toggle" onclick="toggleInfo('vsl')">ⓘ Benchmarks &amp; Notes</button>
+<div class="info-panel" id="info-vsl">
+<div class="info-section"><strong>Purpose:</strong> Forecast a Video Sales Letter (VSL) or call-booking funnel where paid traffic turns into leads, booked calls, attended calls, and closed sales.</div>
+<div class="info-section"><strong>Benchmarks:</strong> Book rates often land around 5–20%, show-up rates around 50–65%, and close rates around 20–30% are a safer starting point than top-performer numbers.</div>
+<div class="info-section"><strong>Watch out for:</strong> Small improvements at each stage compound. This model is useful for planning, but real-world sales behavior will always vary.</div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 1 — Ad Metrics</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Ad Spend</span> ($)</label><input id="vsl-spend" min="0" step="1" type="number" value="1000"/></div>
+<div class="field"><label><span class="term-metric">CPM</span> ($)</label><input id="vsl-cpm" min="0" step="0.1" type="number" value="20"/></div>
+<div class="field"><label><span class="term-metric">CPL</span> ($)</label><input id="vsl-cpl" min="0.01" step="0.1" type="number" value="25"/><span class="hint">Cost per video sales letter (VSL) opt-in</span></div>
+<div class="field"><label>Impressions</label><div class="calc-display" id="vsl-impressions">—</div></div>
+<div class="field"><label>VSL Opt-Ins</label><div class="calc-display" id="vsl-optins">—</div></div>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Step 2 — Call Booking &amp; Sales</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Book Rate</span> (%)</label><input id="vsl-book" max="100" min="0" step="0.1" type="number" value="10"/><span class="hint">% of opt-ins who book</span></div>
+<div class="field"><label>Calls Booked</label><div class="calc-display" id="vsl-booked">—</div></div>
+<div class="field"><label>Show Up Rate (%)</label><input id="vsl-show" max="100" min="0" step="0.1" type="number" value="55"/></div>
+<div class="field"><label>Calls Taken</label><div class="calc-display" id="vsl-taken">—</div></div>
+<div class="field"><label><span class="term-money">Close Rate</span> (%)</label><input id="vsl-close" max="100" min="0" step="0.1" type="number" value="25"/></div>
+<div class="field"><label>Sales Made</label><div class="calc-display" id="vsl-sales">—</div></div>
+<div class="field"><label>Offer Price ($)</label><input id="vsl-price" min="0" step="0.01" type="number" value="5000"/></div>
+</div>
+</div>
+<div class="card card-optional">
+<div class="card-title warm">Other Expenses (Optional)</div>
+<div class="field-grid">
+<div class="field"><label><span class="term-money">Other Expenses</span> ($)</label><input id="vsl-expenses" min="0" step="0.01" type="number" value="0"/><span class="hint">Platform fees, tools, freelancers, etc.</span></div>
+</div>
+</div>
+<div class="card"><div class="card-title warm">Results</div><div class="results-grid"><div class="result-field" id="vsl-be-rate-card"><label>Break-Even Close Rate</label><div class="calc-display" id="vsl-be-rate">—</div><div class="result-hint" id="vsl-be-rate-hint"></div></div><div class="result-field primary"><label>ROAS</label><div class="calc-display" id="vsl-roas">—</div></div><div class="result-field"><label>Total Revenue</label><div class="calc-display" id="vsl-revenue">—</div></div><div class="result-field"><label>Cost Per Sale</label><div class="calc-display" id="vsl-cps">—</div></div><div class="result-field full" id="vsl-profit-card"><label>Revenue After Ad Spend</label><div class="calc-display" id="vsl-profit">—</div></div><div class="result-field full" id="vsl-net-profit-card" style="display:none;"><label>Estimated Net Profit</label><div class="calc-display" id="vsl-net-profit">—</div></div></div></div>
+<div class="btn-row"><button class="reset-btn" onclick="resetTab('vsl')">Reset</button></div>
+</div>
+</div>
+</div>
+<footer class="site-footer">
+<div>Built by Lindsay Fondren</div>
+<div><a href="https://www.linkedin.com/in/lindsayfondren/" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a></div>
+</footer>
+
+<button aria-label="Back to top" class="back-to-top" id="backToTop" title="Back to top"><svg viewBox="0 0 23 23" aria-hidden="true"><path d="M6 14l6-6 6 6"/></svg></button>
+<script>
+const $ = id => document.getElementById(id);
+function g(id) { return parseFloat($(id).value) || 0; }
+
+function fmtC(n) {
+  if (!isFinite(n) || isNaN(n)) return '—';
+  return '$' + Number(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
+}
+function fmtROAS(n) {
+  if (!isFinite(n) || isNaN(n)) return '—';
+  return n.toFixed(2) + 'x';
+}
+function fmtInt(n) {
+  if (!isFinite(n) || isNaN(n)) return '—';
+  return Math.round(n).toLocaleString('en-US');
+}
+function fmtPct(n) {
+  if (!isFinite(n) || isNaN(n)) return '—';
+  return n.toFixed(1) + '%';
+}
+function fmtSignedCurrency(n) {
+  if (!isFinite(n) || isNaN(n)) return '—';
+  return (n < 0 ? '-' : '') + fmtC(Math.abs(n));
+}
+
+function setProfit(cardId, valId, profit) {
+  const card = $(cardId), val = $(valId);
+  if (!card || !val) return;
+  card.classList.remove('profit', 'loss');
+  card.classList.add(profit >= 0 ? 'profit' : 'loss');
+  val.textContent = fmtSignedCurrency(profit);
+}
+
+function setBreakEven(cardId, valId, hintId, breakEvenVal, currentVal, isRate) {
+  const card = $(cardId), val = $(valId), hint = $(hintId);
+  if (!card || !val) return;
+  card.classList.remove('profit', 'loss');
+  const isGood = currentVal >= breakEvenVal;
+  card.classList.add(isGood ? 'profit' : 'loss');
+  const buffer = currentVal - breakEvenVal;
+  if (isRate) {
+    val.textContent = fmtPct(breakEvenVal);
+    if (hint) hint.textContent = `Current: ${fmtPct(currentVal)} • ${buffer >= 0 ? 'Buffer' : 'Shortfall'}: ${fmtPct(Math.abs(buffer))}`;
+  } else {
+    val.textContent = fmtC(breakEvenVal);
+    if (hint) hint.textContent = `${buffer >= 0 ? 'Buffer' : 'Shortfall'}: ${fmtC(Math.abs(buffer))} vs current ${fmtC(currentVal)}`;
+  }
+}
+
+function runTripwire(spend, cpm, cpl, price, pr, bumpPrice, bumpPr) {
+  const impressions = cpm > 0 ? (spend / cpm) * 1000 : 0;
+  const leads = cpl > 0 ? spend / cpl : 0;
+  const purchases = leads * pr / 100;
+  const bumpPurch = purchases * bumpPr / 100;
+  const revenue = purchases * price + bumpPurch * bumpPrice;
+  const roas = spend > 0 ? revenue / spend : 0;
+  const aov = purchases > 0 ? revenue / purchases : 0;
+  return { impressions, leads, purchases, bumpPurch, revenue, roas, aov, cps: purchases > 0 ? spend / purchases : 0, profit: revenue - spend };
+}
+function calcTripwire() {
+  const r = runTripwire(g('tw-spend'), g('tw-cpm'), g('tw-cpl'), g('tw-price'), g('tw-pr'), g('tw-bump-price'), g('tw-bump-pr'));
+  const expenses = g('tw-expenses');
+  $('tw-impressions').textContent = fmtInt(r.impressions);
+  $('tw-leads').textContent = fmtInt(r.leads);
+  $('tw-purchases').textContent = fmtInt(r.purchases);
+  $('tw-bump-purchases').textContent = fmtInt(r.bumpPurch);
+  $('tw-roas').textContent = fmtROAS(r.roas);
+  $('tw-revenue').textContent = fmtC(r.revenue);
+  $('tw-aov').textContent = fmtC(r.aov);
+  $('tw-cps').textContent = fmtC(r.cps);
+  setProfit('tw-profit-card', 'tw-profit', r.profit);
+  $('tw-net-profit-card').style.display = expenses > 0 ? 'block' : 'none';
+  if (expenses > 0) setProfit('tw-net-profit-card', 'tw-net-profit', r.profit - expenses);
+  const breakEvenRate = r.leads > 0 ? ((g('tw-spend') + expenses) / (r.aov || 1) / r.leads * 100) : 0;
+  const currentRate = g('tw-pr');
+  const breakEvenCard = $('tw-be-rate-card');
+  breakEvenCard.classList.remove('profit', 'loss');
+  breakEvenCard.classList.add(currentRate >= breakEvenRate ? 'profit' : 'loss');
+  $('tw-be-rate').textContent = fmtPct(breakEvenRate);
+  $('tw-be-rate-hint').textContent = `Current purchase rate: ${fmtPct(currentRate)}. Breaking even is helpful, but a small front-end loss can still be acceptable if this offer creates buyers you monetize later.`;
+}
+
+function runDigital(spend, cpm, ctr, price, pr, bumpPrice, bumpPr, otoPrice, otoPr) {
+  const impressions = cpm > 0 ? (spend / cpm) * 1000 : 0;
+  const clicks = impressions * ctr / 100;
+  const purchases = clicks * pr / 100;
+  const bumpPurch = purchases * bumpPr / 100;
+  const otoPurch = purchases * otoPr / 100;
+  const revenue = purchases * price + bumpPurch * bumpPrice + otoPurch * otoPrice;
+  const roas = spend > 0 ? revenue / spend : 0;
+  const aov = purchases > 0 ? revenue / purchases : 0;
+  return { impressions, clicks, purchases, bumpPurch, otoPurch, revenue, roas, aov, cps: purchases > 0 ? spend / purchases : 0, profit: revenue - spend };
+}
+function calcDigital() {
+  const r = runDigital(g('dp-spend'), g('dp-cpm'), g('dp-ctr'), g('dp-price'), g('dp-pr'), g('dp-bump-price'), g('dp-bump-pr'), g('dp-oto-price'), g('dp-oto-pr'));
+  const expenses = g('dp-expenses');
+  $('dp-impressions').textContent = fmtInt(r.impressions);
+  $('dp-clicks').textContent = fmtInt(r.clicks);
+  $('dp-purchases').textContent = fmtInt(r.purchases);
+  $('dp-bump-purchases').textContent = fmtInt(r.bumpPurch);
+  $('dp-oto-purchases').textContent = fmtInt(r.otoPurch);
+  $('dp-roas').textContent = fmtROAS(r.roas);
+  $('dp-revenue').textContent = fmtC(r.revenue);
+  $('dp-aov').textContent = fmtC(r.aov);
+  $('dp-cps').textContent = fmtC(r.cps);
+  setProfit('dp-profit-card', 'dp-profit', r.profit);
+  $('dp-net-profit-card').style.display = expenses > 0 ? 'block' : 'none';
+  if (expenses > 0) setProfit('dp-net-profit-card', 'dp-net-profit', r.profit - expenses);
+  const breakEvenRate = r.clicks > 0 ? ((g('dp-spend') + expenses) / (r.aov || 1) / r.clicks * 100) : 0;
+  setBreakEven('dp-be-rate-card', 'dp-be-rate', 'dp-be-rate-hint', breakEvenRate, g('dp-pr'), true);
+}
+
+function runWebinar(spend, cpm, cpl, conv, price) {
+  const impressions = cpm > 0 ? (spend / cpm) * 1000 : 0;
+  const optins = cpl > 0 ? spend / cpl : 0;
+  const purchases = optins * conv / 100;
+  const revenue = purchases * price;
+  const roas = spend > 0 ? revenue / spend : 0;
+  const breakEvenRate = optins > 0 ? (spend / ((price || 1) * optins) * 100) : 0;
+  return { impressions, optins, purchases, revenue, roas, cps: purchases > 0 ? spend / purchases : 0, profit: revenue - spend, breakEvenRate };
+}
+function calcWebinar() {
+  const r = runWebinar(g('wb-spend'), g('wb-cpm'), g('wb-cpl'), g('wb-conv'), g('wb-price'));
+  const expenses = g('wb-expenses');
+  $('wb-impressions').textContent = fmtInt(r.impressions);
+  $('wb-optins').textContent = fmtInt(r.optins);
+  $('wb-purchases').textContent = fmtInt(r.purchases);
+  $('wb-roas').textContent = fmtROAS(r.roas);
+  $('wb-revenue').textContent = fmtC(r.revenue);
+  $('wb-cps').textContent = fmtC(r.cps);
+  setProfit('wb-profit-card', 'wb-profit', r.profit);
+  $('wb-net-profit-card').style.display = expenses > 0 ? 'block' : 'none';
+  if (expenses > 0) setProfit('wb-net-profit-card', 'wb-net-profit', r.profit - expenses);
+  const breakEvenRate = r.optins > 0 ? ((g('wb-spend') + expenses) / ((g('wb-price') || 1) * r.optins) * 100) : 0;
+  setBreakEven('wb-be-rate-card', 'wb-be-rate', 'wb-be-rate-hint', breakEvenRate, g('wb-conv'), true);
+}
+
+function runVSL(spend, cpm, cpl, bookRate, showRate, closeRate, price) {
+  const impressions = cpm > 0 ? (spend / cpm) * 1000 : 0;
+  const optins = cpl > 0 ? spend / cpl : 0;
+  const booked = optins * bookRate / 100;
+  const taken = booked * showRate / 100;
+  const sales = taken * closeRate / 100;
+  const revenue = sales * price;
+  const roas = spend > 0 ? revenue / spend : 0;
+  const breakEvenRate = taken > 0 ? (spend / ((price || 1) * taken) * 100) : 0;
+  return { impressions, optins, booked, taken, sales, revenue, roas, cps: sales > 0 ? spend / sales : 0, profit: revenue - spend, breakEvenRate };
+}
+function calcVSL() {
+  const r = runVSL(g('vsl-spend'), g('vsl-cpm'), g('vsl-cpl'), g('vsl-book'), g('vsl-show'), g('vsl-close'), g('vsl-price'));
+  const expenses = g('vsl-expenses');
+  $('vsl-impressions').textContent = fmtInt(r.impressions);
+  $('vsl-optins').textContent = fmtInt(r.optins);
+  $('vsl-booked').textContent = fmtInt(r.booked);
+  $('vsl-taken').textContent = fmtInt(r.taken);
+  $('vsl-sales').textContent = fmtInt(r.sales);
+  $('vsl-roas').textContent = fmtROAS(r.roas);
+  $('vsl-revenue').textContent = fmtC(r.revenue);
+  $('vsl-cps').textContent = fmtC(r.cps);
+  setProfit('vsl-profit-card', 'vsl-profit', r.profit);
+  $('vsl-net-profit-card').style.display = expenses > 0 ? 'block' : 'none';
+  if (expenses > 0) setProfit('vsl-net-profit-card', 'vsl-net-profit', r.profit - expenses);
+  const breakEvenRate = r.taken > 0 ? ((g('vsl-spend') + expenses) / ((g('vsl-price') || 1) * r.taken) * 100) : 0;
+  setBreakEven('vsl-be-rate-card', 'vsl-be-rate', 'vsl-be-rate-hint', breakEvenRate, g('vsl-close'), true);
+}
+
+function calcLeadMagnet() {
+  const spend = g('lm-spend'), cpm = g('lm-cpm'), cpl = g('lm-cpl');
+  const impressions = cpm > 0 ? (spend / cpm) * 1000 : 0;
+  const leads = cpl > 0 ? spend / cpl : 0;
+  $('lm-impressions').textContent = fmtInt(impressions);
+  $('lm-leads').textContent = fmtInt(leads);
+  $('lm-impressions-result').textContent = fmtInt(impressions);
+  $('lm-cpm-result').textContent = fmtC(cpm);
+  $('lm-cpl-result').textContent = fmtC(cpl);
+}
+
+function toggleInfo(tabId) {
+  $('info-' + tabId).classList.toggle('open');
+}
+
+const DEFAULTS = {
+  leadmagnet: { 'lm-spend': 1000, 'lm-cpm': 15, 'lm-cpl': 12 },
+  tripwire: { 'tw-spend': 1000, 'tw-cpm': 15, 'tw-cpl': 5, 'tw-price': 17, 'tw-pr': 5, 'tw-bump-price': 27, 'tw-bump-pr': 30, 'tw-expenses': 0 },
+  digital: { 'dp-spend': 3000, 'dp-cpm': 20, 'dp-ctr': 1.7, 'dp-price': 47, 'dp-pr': 3, 'dp-bump-price': 17, 'dp-bump-pr': 30, 'dp-oto-price': 97, 'dp-oto-pr': 10, 'dp-expenses': 0 },
+  webinar: { 'wb-spend': 1000, 'wb-cpm': 20, 'wb-cpl': 12, 'wb-conv': 5, 'wb-price': 997, 'wb-expenses': 0 },
+  vsl: { 'vsl-spend': 1000, 'vsl-cpm': 20, 'vsl-cpl': 25, 'vsl-book': 10, 'vsl-show': 55, 'vsl-close': 25, 'vsl-price': 5000, 'vsl-expenses': 0 }
+};
+
+function resetTab(tabId) {
+  const defaults = DEFAULTS[tabId];
+  Object.entries(defaults).forEach(([id, val]) => {
+    if ($(id)) $(id).value = val;
+  });
+  const calcMap = { tripwire: calcTripwire, digital: calcDigital, webinar: calcWebinar, vsl: calcVSL, leadmagnet: calcLeadMagnet };
+  calcMap[tabId]();
+}
+
+const fns = { starthere: () => {}, tripwire: calcTripwire, digital: calcDigital, webinar: calcWebinar, vsl: calcVSL, leadmagnet: calcLeadMagnet };
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.calculator').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    const tabId = btn.dataset.tab;
+    $('calc-' + tabId).classList.add('active');
+    btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    fns[tabId]();
+  });
+});
+
+[
+  [['lm-spend', 'lm-cpm', 'lm-cpl'], calcLeadMagnet],
+  [['tw-spend', 'tw-cpm', 'tw-cpl', 'tw-price', 'tw-pr', 'tw-bump-price', 'tw-bump-pr', 'tw-expenses'], calcTripwire],
+  [['dp-spend', 'dp-cpm', 'dp-ctr', 'dp-price', 'dp-pr', 'dp-bump-price', 'dp-bump-pr', 'dp-oto-price', 'dp-oto-pr', 'dp-expenses'], calcDigital],
+  [['wb-spend', 'wb-cpm', 'wb-cpl', 'wb-conv', 'wb-price', 'wb-expenses'], calcWebinar],
+  [['vsl-spend', 'vsl-cpm', 'vsl-cpl', 'vsl-book', 'vsl-show', 'vsl-close', 'vsl-price', 'vsl-expenses'], calcVSL],
+].forEach(([ids, fn]) => ids.forEach(id => {
+  const el = $(id);
+  if (el) el.addEventListener('input', fn);
+}));
+
+calcLeadMagnet();
+calcTripwire();
+calcDigital();
+calcWebinar();
+calcVSL();
+
+const backToTopBtn = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 320) backToTopBtn.classList.add('visible');
+  else backToTopBtn.classList.remove('visible');
+});
+backToTopBtn?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>
